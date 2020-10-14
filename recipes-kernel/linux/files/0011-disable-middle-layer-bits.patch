@@ -1,0 +1,13 @@
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine.dtsi b/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine.dtsi
+index 08927f5bd3e8..a274d0f24008 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine.dtsi
++++ b/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine.dtsi
+@@ -40,7 +40,7 @@
+ };
+ 
+ &spi0  {
+-	status = "okay";
++	status = "disabled";
+ 
+ 	flash@0 {
+ 		#address-cells = <1>;

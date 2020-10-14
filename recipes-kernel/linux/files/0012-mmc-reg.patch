@@ -1,0 +1,13 @@
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts b/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts
+index 910212622179..45d808a4d8c8 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts
++++ b/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts
+@@ -153,7 +153,7 @@
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&mmc2_pins>;
+ 	vmmc-supply = <&reg_dcdc1>;
+-	vqmmc-supply = <&reg_vcc1v8>;
++	vqmmc-supply = <&reg_dcdc1>;
+ 	bus-width = <8>;
+ 	non-removable;
+ 	cap-mmc-hw-reset;

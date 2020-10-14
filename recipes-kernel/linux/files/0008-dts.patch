@@ -1,0 +1,209 @@
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts b/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts
+index a73ada45f9c1..48fe9d4523d8 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts
++++ b/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts
+@@ -14,12 +14,7 @@
+ 		     "allwinner,sun50i-a64";
+ 
+ 	aliases {
+-		ethernet0 = &emac;
+ 		serial0 = &uart0;
+-		serial1 = &uart1;
+-		serial2 = &uart2;
+-		serial3 = &uart3;
+-		serial4 = &uart4;
+ 	};
+ 
+ 	chosen {
+@@ -44,26 +39,20 @@
+ 		regulator-max-microvolt = <1800000>;
+ 	};
+ 
+-	vdd_dsi: regulator@0 {
++	vdd_bl: regulator@0 {
+ 		compatible = "regulator-fixed";
+-		regulator-name = "dsi-1v8";
+-		regulator-min-microvolt = <1800000>;
+-		regulator-max-microvolt = <1800000>;
+-	};
+-
+-
+-	wifi_pwrseq: wifi_pwrseq {
+-		compatible = "mmc-pwrseq-simple";
+-		reset-gpios = <&r_pio 0 2 GPIO_ACTIVE_LOW>; /* PL2 */
++		regulator-name = "bl-3v3";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
+ 	};
+ 
+ 	backlight: backlight {
+ 		compatible = "pwm-backlight";
+ 		pwms = <&r_pwm 0 50000 PWM_POLARITY_INVERTED>;
+-		brightness-levels = <0 10 20 30 40 50 60 70 80 90 100>;
+-		default-brightness-level = <8>;
+-		enable-gpios = <&pio 5 6 GPIO_ACTIVE_HIGH>; /* LCD-BL-EN: PF6 */
+-		power-supply = <&vdd_dsi>;
++ 		brightness-levels = <0 16 18 20 22 24 26 29 32 35 38 42 46 51 56 62 68 75 83 91 100>;
++ 		default-brightness-level = <15>;
++		enable-gpios = <&pio 5 6 GPIO_ACTIVE_LOW>; /* PF6 */
++		power-supply = <&vdd_bl>;
+ 	};
+ };
+ 
+@@ -104,8 +93,8 @@
+ 	panel@0 {
+ 		compatible = "bananapi,lhr050h41", "ilitek,ili9881c";
+ 		reg = <0>;
+-		power-supply = <&vdd_dsi>;	/* VCC-LCD */
+-		reset-gpios = <&pio 1 4 GPIO_ACTIVE_HIGH>; /* LCD-RST: PD24 */
++		power-supply = <&reg_dc1sw>;	/* VCC-LCD */
++		reset-gpios = <&pio 1 4 GPIO_ACTIVE_HIGH>; /* LCD-RST: PB24 */
+ 		backlight = <&backlight>;
+ 	};
+ };
+@@ -138,13 +127,23 @@
+ 
+ &emac {
+ 	pinctrl-names = "default";
+-	pinctrl-0 = <&rgmii_pins>;
+-	phy-mode = "rgmii";
+-	phy-handle = <&ext_rgmii_phy>;
++	pinctrl-0 = <&rmii_pins>;
++	phy-mode = "rmii";
++	phy-handle = <&ext_rmii_phy>;
+ 	phy-supply = <&reg_dc1sw>;
+ 	status = "disabled";
+ };
+ 
++&mdio {
++	ext_rmii_phy: ethernet-phy@0 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <0>;
++		reset-gpios = <&pio 3 24 GPIO_ACTIVE_LOW>; /* PD24 */
++		reset-assert-us = <10000>;
++		reset-deassert-us = <100000>;
++	};
++};
++
+ &hdmi {
+ 	hvcc-supply = <&reg_dldo1>;
+ 	status = "okay";
+@@ -159,7 +158,7 @@
+ &i2c0 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&i2c0_pins>;
+-	status = "okay";
++	status = "disabled";
+ 
+ 	gt911@5d {
+ 		compatible = "goodix,gt911";
+@@ -185,24 +184,6 @@
+ 	status = "okay";
+ };
+ 
+-&mdio {
+-	ext_rgmii_phy: ethernet-phy@1 {
+-		compatible = "ethernet-phy-ieee802.3-c22";
+-		reg = <1>;
+-	};
+-};
+-
+-&mmc1 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&mmc1_pins>;
+-	vmmc-supply = <&reg_dldo4>;
+-	vqmmc-supply = <&reg_eldo1>;
+-	mmc-pwrseq = <&wifi_pwrseq>;
+-	non-removable;
+-	bus-width = <4>;
+-	status = "disabled";
+-};
+-
+ &mmc2 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&mmc2_pins>;
+	 
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine.dtsi b/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine.dtsi
+index c48692b06e1f..08927f5bd3e8 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine.dtsi
++++ b/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine.dtsi
+@@ -28,17 +28,6 @@
+ 	cpu-supply = <&reg_dcdc2>;
+ };
+ 
+-&mmc0 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&mmc0_pins>;
+-	vmmc-supply = <&reg_dcdc1>;
+-	non-removable;
+-	disable-wp;
+-	bus-width = <4>;
+-	cd-gpios = <&pio 5 6 GPIO_ACTIVE_LOW>; /* PF6 */
+-	status = "okay";
+-};
+-
+ &r_rsb {
+ 	status = "okay";
+ 
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-a64.dtsi b/arch/arm64/boot/dts/allwinner/sun50i-a64.dtsi
+index 4105018d0097..40e84659d60e 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-a64.dtsi
++++ b/arch/arm64/boot/dts/allwinner/sun50i-a64.dtsi
+@@ -477,34 +477,6 @@
+ 			allwinner,sram = <&ve_sram 1>;
+ 		};
+ 
+-		mmc0: mmc@1c0f000 {
+-			compatible = "allwinner,sun50i-a64-mmc";
+-			reg = <0x01c0f000 0x1000>;
+-			clocks = <&ccu CLK_BUS_MMC0>, <&ccu CLK_MMC0>;
+-			clock-names = "ahb", "mmc";
+-			resets = <&ccu RST_BUS_MMC0>;
+-			reset-names = "ahb";
+-			interrupts = <GIC_SPI 60 IRQ_TYPE_LEVEL_HIGH>;
+-			max-frequency = <150000000>;
+-			status = "disabled";
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-		};
+-
+-		mmc1: mmc@1c10000 {
+-			compatible = "allwinner,sun50i-a64-mmc";
+-			reg = <0x01c10000 0x1000>;
+-			clocks = <&ccu CLK_BUS_MMC1>, <&ccu CLK_MMC1>;
+-			clock-names = "ahb", "mmc";
+-			resets = <&ccu RST_BUS_MMC1>;
+-			reset-names = "ahb";
+-			interrupts = <GIC_SPI 61 IRQ_TYPE_LEVEL_HIGH>;
+-			max-frequency = <150000000>;
+-			status = "disabled";
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-		};
+-
+ 		mmc2: mmc@1c11000 {
+ 			compatible = "allwinner,sun50i-a64-emmc";
+ 			reg = <0x01c11000 0x1000>;
+@@ -690,22 +662,6 @@
+ 				function = "lcd0";
+ 			};
+ 
+-			mmc0_pins: mmc0-pins {
+-				pins = "PF0", "PF1", "PF2", "PF3",
+-				       "PF4", "PF5";
+-				function = "mmc0";
+-				drive-strength = <30>;
+-				bias-pull-up;
+-			};
+-
+-			mmc1_pins: mmc1-pins {
+-				pins = "PG0", "PG1", "PG2", "PG3",
+-				       "PG4", "PG5";
+-				function = "mmc1";
+-				drive-strength = <30>;
+-				bias-pull-up;
+-			};
+-
+ 			mmc2_pins: mmc2-pins {
+ 				pins = "PC5", "PC6", "PC8", "PC9",
+ 				       "PC10","PC11", "PC12", "PC13",
