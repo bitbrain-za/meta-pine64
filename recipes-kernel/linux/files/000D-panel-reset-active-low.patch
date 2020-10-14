@@ -1,0 +1,13 @@
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts b/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts
+index 3a9cbd1db3e3..ad4592fa16d1 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts
++++ b/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts
+@@ -94,7 +94,7 @@
+ 		compatible = "bananapi,lhr050h41", "ilitek,ili9881c";
+ 		reg = <0>;
+ 		power-supply = <&reg_dldo2>;	/* VCC-LCD */
+-		reset-gpios = <&pio 1 4 GPIO_ACTIVE_HIGH>; /* LCD-RST: PB24 */
++		reset-gpios = <&pio 1 4 GPIO_ACTIVE_LOW>; /* LCD-RST: PB24 */
+ 		backlight = <&backlight>;
+ 	};
+ };
