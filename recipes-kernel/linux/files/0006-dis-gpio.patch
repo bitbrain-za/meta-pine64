@@ -1,0 +1,22 @@
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts b/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts
+index 3d441cf379a9..e5067e6fe808 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts
++++ b/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts
+@@ -54,7 +54,7 @@
+ 		pwms = <&r_pwm 0 50000 PWM_POLARITY_INVERTED>;
+ 		brightness-levels = <0 10 20 30 40 50 60 70 80 90 100>;
+ 		default-brightness-level = <8>;
+-		enable-gpios = <&pio 7 10 GPIO_ACTIVE_HIGH>; /* LCD-BL-EN: PH10 */
++		enable-gpios = <&pio 5 6 GPIO_ACTIVE_HIGH>; /* LCD-BL-EN: PF6 */
+ 	};
+ };
+ 
+@@ -97,7 +97,7 @@
+ 		reg = <0>;
+ 		avdd-supply = <&reg_dc1sw>;	/* VCC-LCD */
+ 		dvdd-supply = <&reg_dldo2>;	/* VCC-MIPI */
+-		reset-gpios = <&pio 3 24 GPIO_ACTIVE_HIGH>; /* LCD-RST: PD24 */
++		reset-gpios = <&pio 1 4 GPIO_ACTIVE_HIGH>; /* LCD-RST: PD24 */
+ 		backlight = <&backlight>;
+ 	};
+ };

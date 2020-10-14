@@ -1,0 +1,22 @@
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine.dtsi b/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine.dtsi
+index c48692b06e1f..08927f5bd3e8 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine.dtsi
++++ b/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine.dtsi
+@@ -28,17 +28,6 @@
+ 	cpu-supply = <&reg_dcdc2>;
+ };
+ 
+-&mmc0 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&mmc0_pins>;
+-	vmmc-supply = <&reg_dcdc1>;
+-	non-removable;
+-	disable-wp;
+-	bus-width = <4>;
+-	cd-gpios = <&pio 5 6 GPIO_ACTIVE_LOW>; /* PF6 */
+-	status = "okay";
+-};
+-
+ &r_rsb {
+ 	status = "okay";
+ 

@@ -22,6 +22,16 @@ SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git;branch
            file://0004-arm64-allwinner-sopine-baseboard-Enable-FeiyangFY070.patch \
            file://0005-arm64-allwinner-sopine-baseboard-Enable-I2C-touchscr.patch \
            file://0001-Revert-module-Harden-STRICT_MODULE_RWX.patch \
+           file://0006-dis-gpio.patch \
+           file://0007-change-panel-and-disable-stuff.patch \
+           file://0008-strip.patch \
+           file://0008b-strip.patch \
+           file://0008c-strip.patch \
+           file://0008d-strip.patch \
+           file://0009-drm.patch \
+           file://0009b-drm.patch \
+           file://0009c-drm.patch \
+           file://0010-invert-reset.patch \
            file://extra.cfg \
            file://screen.cfg \
 	  "

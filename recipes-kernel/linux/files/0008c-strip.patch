@@ -1,0 +1,39 @@
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-a64.dtsi b/arch/arm64/boot/dts/allwinner/sun50i-a64.dtsi
+index ba4db78db9a0..40e84659d60e 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-a64.dtsi
++++ b/arch/arm64/boot/dts/allwinner/sun50i-a64.dtsi
+@@ -477,34 +477,6 @@
+ 			allwinner,sram = <&ve_sram 1>;
+ 		};
+ 
+-		mmc0: mmc@1c0f000 {
+-			compatible = "allwinner,sun50i-a64-mmc";
+-			reg = <0x01c0f000 0x1000>;
+-			clocks = <&ccu CLK_BUS_MMC0>, <&ccu CLK_MMC0>;
+-			clock-names = "ahb", "mmc";
+-			resets = <&ccu RST_BUS_MMC0>;
+-			reset-names = "ahb";
+-			interrupts = <GIC_SPI 60 IRQ_TYPE_LEVEL_HIGH>;
+-			max-frequency = <150000000>;
+-			status = "disabled";
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-		};
+-
+-		mmc1: mmc@1c10000 {
+-			compatible = "allwinner,sun50i-a64-mmc";
+-			reg = <0x01c10000 0x1000>;
+-			clocks = <&ccu CLK_BUS_MMC1>, <&ccu CLK_MMC1>;
+-			clock-names = "ahb", "mmc";
+-			resets = <&ccu RST_BUS_MMC1>;
+-			reset-names = "ahb";
+-			interrupts = <GIC_SPI 61 IRQ_TYPE_LEVEL_HIGH>;
+-			max-frequency = <150000000>;
+-			status = "disabled";
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-		};
+-
+ 		mmc2: mmc@1c11000 {
+ 			compatible = "allwinner,sun50i-a64-emmc";
+ 			reg = <0x01c11000 0x1000>;

@@ -1,0 +1,165 @@
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts b/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts
+index a73ada45f9c1..910212622179 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts
++++ b/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts
+@@ -14,12 +14,7 @@
+ 		     "allwinner,sun50i-a64";
+ 
+ 	aliases {
+-		ethernet0 = &emac;
+ 		serial0 = &uart0;
+-		serial1 = &uart1;
+-		serial2 = &uart2;
+-		serial3 = &uart3;
+-		serial4 = &uart4;
+ 	};
+ 
+ 	chosen {
+@@ -83,10 +78,6 @@
+ 	status = "okay";
+ };
+ 
+-&dai {
+-	status = "disabled";
+-};
+-
+ &de {
+ 	status = "okay";
+ };
+@@ -136,15 +127,6 @@
+ 	status = "okay";
+ };
+ 
+-&emac {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&rgmii_pins>;
+-	phy-mode = "rgmii";
+-	phy-handle = <&ext_rgmii_phy>;
+-	phy-supply = <&reg_dc1sw>;
+-	status = "disabled";
+-};
+-
+ &hdmi {
+ 	hvcc-supply = <&reg_dldo1>;
+ 	status = "okay";
+@@ -156,24 +138,6 @@
+ 	};
+ };
+ 
+-&i2c0 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&i2c0_pins>;
+-	status = "okay";
+-
+-	gt911@5d {
+-		compatible = "goodix,gt911";
+-		reg = <0x5d>;
+-
+-		interrupt-parent = <&pio>;
+-		interrupts = <7 4 IRQ_TYPE_EDGE_RISING>; /* PH4 */
+-		reset-gpios = <&pio 7 11 GPIO_ACTIVE_HIGH>; /* PH11 */
+-		touchscreen-inverted-x;
+-		touchscreen-inverted-y;
+-		AVDD28-supply = <&reg_ldo_io0>; /* VCC-CTP: GPIO0-LDO */
+-	};
+-};
+-
+ &reg_ldo_io0 {
+ 	regulator-min-microvolt = <3300000>;
+ 	regulator-max-microvolt = <3300000>;
+@@ -185,24 +149,6 @@
+ 	status = "okay";
+ };
+ 
+-&mdio {
+-	ext_rgmii_phy: ethernet-phy@1 {
+-		compatible = "ethernet-phy-ieee802.3-c22";
+-		reg = <1>;
+-	};
+-};
+-
+-&mmc1 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&mmc1_pins>;
+-	vmmc-supply = <&reg_dldo4>;
+-	vqmmc-supply = <&reg_eldo1>;
+-	mmc-pwrseq = <&wifi_pwrseq>;
+-	non-removable;
+-	bus-width = <4>;
+-	status = "disabled";
+-};
+-
+ &mmc2 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&mmc2_pins>;
+@@ -254,24 +200,6 @@
+ 	vcc-hdmi-supply = <&reg_dldo1>;
+ };
+ 
+-&sound {
+-	simple-audio-card,aux-devs = <&codec_analog>;
+-	simple-audio-card,widgets = "Microphone", "Microphone Jack",
+-				    "Headphone", "Headphone Jack";
+-	simple-audio-card,routing =
+-			"Left DAC", "AIF1 Slot 0 Left",
+-			"Right DAC", "AIF1 Slot 0 Right",
+-			"Headphone Jack", "HP",
+-			"AIF1 Slot 0 Left ADC", "Left ADC",
+-			"AIF1 Slot 0 Right ADC", "Right ADC",
+-			"MIC2", "Microphone Jack";
+-	status = "disabled";
+-};
+-
+-&sound_hdmi {
+-	status = "disabled";
+-};
+-
+ &ths {
+ 	status = "okay";
+ };
+@@ -282,45 +210,3 @@
+ 	status = "okay";
+ };
+ 
+-&uart1 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&uart1_pins>, <&uart1_rts_cts_pins>;
+-	uart-has-rtscts = <1>;
+-	status = "disabled";
+-
+-	bluetooth {
+-		compatible = "realtek,rtl8723bs-bt";
+-		device-wake-gpios = <&r_pio 0 5 GPIO_ACTIVE_HIGH>; /* PL5 */
+-		host-wake-gpios = <&r_pio 0 6 GPIO_ACTIVE_HIGH>; /* PL6 */
+-	};
+-};
+-
+-/* On Pi-2 connector */
+-&uart2 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&uart2_pins>;
+-	status = "disabled";
+-};
+-
+-/* On Euler connector */
+-&uart3 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&uart3_pins>;
+-	status = "disabled";
+-};
+-
+-/* On Euler connector, RTS/CTS optional */
+-&uart4 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&uart4_pins>;
+-	status = "disabled";
+-};
+-
+-&usb_otg {
+-	dr_mode = "host";
+-	status = "okay";
+-};
+-
+-&usbphy {
+-	status = "okay";
+-};

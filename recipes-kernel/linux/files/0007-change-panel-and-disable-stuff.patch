@@ -1,0 +1,90 @@
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts b/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts
+index e5067e6fe808..a73ada45f9c1 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts
++++ b/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts
+@@ -44,6 +44,14 @@
+ 		regulator-max-microvolt = <1800000>;
+ 	};
+ 
++	vdd_dsi: regulator@0 {
++		compatible = "regulator-fixed";
++		regulator-name = "dsi-1v8";
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++	};
++
++
+ 	wifi_pwrseq: wifi_pwrseq {
+ 		compatible = "mmc-pwrseq-simple";
+ 		reset-gpios = <&r_pio 0 2 GPIO_ACTIVE_LOW>; /* PL2 */
+@@ -55,6 +63,7 @@
+ 		brightness-levels = <0 10 20 30 40 50 60 70 80 90 100>;
+ 		default-brightness-level = <8>;
+ 		enable-gpios = <&pio 5 6 GPIO_ACTIVE_HIGH>; /* LCD-BL-EN: PF6 */
++		power-supply = <&vdd_dsi>;
+ 	};
+ };
+ 
+@@ -75,7 +84,7 @@
+ };
+ 
+ &dai {
+-	status = "okay";
++	status = "disabled";
+ };
+ 
+ &de {
+@@ -93,10 +102,9 @@
+ 	status = "okay";
+ 
+ 	panel@0 {
+-		compatible = "feiyang,fy07024di26a30d";
++		compatible = "bananapi,lhr050h41", "ilitek,ili9881c";
+ 		reg = <0>;
+-		avdd-supply = <&reg_dc1sw>;	/* VCC-LCD */
+-		dvdd-supply = <&reg_dldo2>;	/* VCC-MIPI */
++		power-supply = <&vdd_dsi>;	/* VCC-LCD */
+ 		reset-gpios = <&pio 1 4 GPIO_ACTIVE_HIGH>; /* LCD-RST: PD24 */
+ 		backlight = <&backlight>;
+ 	};
+@@ -134,7 +142,7 @@
+ 	phy-mode = "rgmii";
+ 	phy-handle = <&ext_rgmii_phy>;
+ 	phy-supply = <&reg_dc1sw>;
+-	status = "okay";
++	status = "disabled";
+ };
+ 
+ &hdmi {
+@@ -192,7 +200,7 @@
+ 	mmc-pwrseq = <&wifi_pwrseq>;
+ 	non-removable;
+ 	bus-width = <4>;
+-	status = "okay";
++	status = "disabled";
+ };
+ 
+ &mmc2 {
+@@ -257,11 +265,11 @@
+ 			"AIF1 Slot 0 Left ADC", "Left ADC",
+ 			"AIF1 Slot 0 Right ADC", "Right ADC",
+ 			"MIC2", "Microphone Jack";
+-	status = "okay";
++	status = "disabled";
+ };
+ 
+ &sound_hdmi {
+-	status = "okay";
++	status = "disabled";
+ };
+ 
+ &ths {
+@@ -278,7 +286,7 @@
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&uart1_pins>, <&uart1_rts_cts_pins>;
+ 	uart-has-rtscts = <1>;
+-	status = "okay";
++	status = "disabled";
+ 
+ 	bluetooth {
+ 		compatible = "realtek,rtl8723bs-bt";
