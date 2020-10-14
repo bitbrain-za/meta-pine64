@@ -1,0 +1,40 @@
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-a64.dtsi b/arch/arm64/boot/dts/allwinner/sun50i-a64.dtsi
+index 4358e07bf197..82959311e294 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-a64.dtsi
++++ b/arch/arm64/boot/dts/allwinner/sun50i-a64.dtsi
+@@ -667,14 +667,14 @@
+ 				       "PC10","PC11", "PC12", "PC13",
+ 				       "PC14", "PC15", "PC16";
+ 				function = "mmc2";
+-				drive-strength = <30>;
++				drive-strength = <40>;
+ 				bias-pull-up;
+ 			};
+ 
+ 			mmc2_ds_pin: mmc2-ds-pin {
+ 				pins = "PC1";
+ 				function = "mmc2";
+-				drive-strength = <30>;
++				drive-strength = <40>;
+ 				bias-pull-up;
+ 			};
+ 
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts b/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts
+index 884c60336d7b..3a9cbd1db3e3 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts
++++ b/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts
+@@ -181,12 +181,13 @@
+ 
+ &mmc2 {
+ 	pinctrl-names = "default";
+-	pinctrl-0 = <&mmc2_pins> ,<&mmc2_ds_pin>;
++	pinctrl-0 = <&mmc2_pins>,<&mmc2_ds_pin>;
+ 	vmmc-supply = <&reg_dcdc1>;
+ 	vqmmc-supply = <&reg_vcc1v8>;
+ 	bus-width = <8>;
+ 	non-removable;
+ 	cap-mmc-hw-reset;
++	mmc-ddr-1_8v;
+ 	status = "okay";
+ };
+ 

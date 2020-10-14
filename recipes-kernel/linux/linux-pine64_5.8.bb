@@ -19,6 +19,7 @@ SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git;branch
            file://0009-drm.patch \
            file://0009b-drm.patch \
            file://0009c-drm.patch \
+           file://0013-tcon.patch \
            file://0001-arm64-allwinner-Add-HDMI-sound-for-sopine-baseboard.patch \
            file://0002-arm64-allwinner-sopine-baseboard-Enable-Bluetooth-an.patch \
            file://0003-arm64-allwinner-pine64-Enable-Bluetooth-and-WiFi.patch \
@@ -31,6 +32,7 @@ SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git;branch
            file://0009-regulators.patch \
            file://000A-emmc.patch \
            file://000B-spi0.patch \
+           file://000C-mmc2.patch \
            file://extra.cfg \
            file://screen.cfg \
 	  "
