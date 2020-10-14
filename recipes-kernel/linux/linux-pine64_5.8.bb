@@ -28,6 +28,9 @@ SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git;branch
            file://0006-dis-gpio.patch \
            file://0007-change-panel-and-disable-stuff.patch \
            file://0008-dts.patch \
+           file://0009-regulators.patch \
+           file://000A-emmc.patch \
+           file://000B-spi0.patch \
            file://extra.cfg \
            file://screen.cfg \
 	  "
