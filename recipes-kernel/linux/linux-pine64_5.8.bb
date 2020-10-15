@@ -34,7 +34,6 @@ SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git;branch
            file://000B-spi0.patch \
            file://000C-mmc2.patch \
            file://000D-reset-timing.patch \
-           file://000E-display-mode.patch \
            file://000F-display-init.patch \
            file://0010-invert-reset.patch \
            file://0011-display-init.patch \
