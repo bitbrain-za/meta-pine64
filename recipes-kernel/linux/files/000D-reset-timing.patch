@@ -1,0 +1,13 @@
+diff --git a/drivers/gpu/drm/panel/panel-ilitek-ili9881c.c b/drivers/gpu/drm/panel/panel-ilitek-ili9881c.c
+index f54077c216a3..6169c709491c 100644
+--- a/drivers/gpu/drm/panel/panel-ilitek-ili9881c.c
++++ b/drivers/gpu/drm/panel/panel-ilitek-ili9881c.c
+@@ -309,7 +309,7 @@ static int ili9881c_prepare(struct drm_panel *panel)
+ 	msleep(20);
+ 
+ 	gpiod_set_value(ctx->reset, 0);
+-	msleep(20);
++	msleep(200);
+ 
+ 	for (i = 0; i < ARRAY_SIZE(ili9881c_init); i++) {
+ 		const struct ili9881c_instr *instr = &ili9881c_init[i];

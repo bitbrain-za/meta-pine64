@@ -1,0 +1,17 @@
+diff --git a/drivers/gpu/drm/panel/panel-ilitek-ili9881c.c b/drivers/gpu/drm/panel/panel-ilitek-ili9881c.c
+index 248551ddfafe..25c5f588f544 100644
+--- a/drivers/gpu/drm/panel/panel-ilitek-ili9881c.c
++++ b/drivers/gpu/drm/panel/panel-ilitek-ili9881c.c
+@@ -400,9 +400,10 @@ static int ili9881c_prepare(struct drm_panel *panel)
+ 
+ 		
+ 	ili9881c_send_byte(ctx, 0x2c);
+-	for(int x=0;x<1280;x++)
++	int x, y;
++	for(x=0;x<1280;x++)
+ 	{
+-		for(int y= 0;y<720;y++)
++		for(y= 0;y<720;y++)
+ 		{
+ 			ili9881c_send_cmd_data(ctx, 0x00, 0x00);
+ 		}

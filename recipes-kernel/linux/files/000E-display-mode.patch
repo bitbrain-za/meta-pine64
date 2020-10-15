@@ -1,0 +1,31 @@
+diff --git a/drivers/gpu/drm/panel/panel-ilitek-ili9881c.c b/drivers/gpu/drm/panel/panel-ilitek-ili9881c.c
+index 6169c709491c..071847649668 100644
+--- a/drivers/gpu/drm/panel/panel-ilitek-ili9881c.c
++++ b/drivers/gpu/drm/panel/panel-ilitek-ili9881c.c
+@@ -369,18 +369,18 @@ static int ili9881c_unprepare(struct drm_panel *panel)
+ }
+ 
+ static const struct drm_display_mode bananapi_default_mode = {
+-	.clock		= 62000,
+-	.vrefresh	= 60,
++	.clock		= 55000,
++	.vrefresh	= 50,
+ 
+ 	.hdisplay	= 720,
+-	.hsync_start	= 720 + 10,
+-	.hsync_end	= 720 + 10 + 20,
+-	.htotal		= 720 + 10 + 20 + 30,
++	.hsync_start	= 720 + 12,
++	.hsync_end	= 720 + 12 + 2,
++	.htotal		= 720 + 12 + 8 + 18,
+ 
+ 	.vdisplay	= 1280,
+-	.vsync_start	= 1280 + 10,
+-	.vsync_end	= 1280 + 10 + 10,
+-	.vtotal		= 1280 + 10 + 10 + 20,
++	.vsync_start	= 1280 + 8,
++	.vsync_end	= 1280 + 8 + 2,
++	.vtotal		= 1280 + 8 + 2 + 8,
+ };
+ 
+ static int ili9881c_get_modes(struct drm_panel *panel,
